@@ -1,5 +1,6 @@
 const { promises } = require("nodemailer/lib/xoauth2");
 const app = require("./app");
+const connectDatabase = require("./db/Database");
 
 // handling uncaught error
 process.on("uncaughtException", (err) => {
@@ -13,6 +14,9 @@ if (process.env.Node_ENV !== "PRODUCTION") {
     path: "backend/config/.env",
   });
 }
+
+// connect DB
+connectDatabase();
 
 //   create server
 const server = app.listen(process.env.PORT, () => {
